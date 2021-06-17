@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-my-lists',
@@ -7,23 +7,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./my-lists.component.scss'],
 })
 export class MyListsComponent implements OnInit {
-  lists: any[] = [
-    {
-      id: 0,
-      name: 'Lista zakupów 😎',
-    },
-    {
-      id: 0,
-      name: 'Projekty na WST',
-    },
-    {
-      id: 0,
-      name: 'Lista 123',
-    },
-  ];
+  lists: any[] = [];
 
-  constructor(private router: Router) {}
+  constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
+    this.lists = this.dataService.LISTS;
   }
 }

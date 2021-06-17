@@ -1,4 +1,6 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-add-list',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dataService: DataService,
+              private location: Location) { }
 
   ngOnInit(): void {
   }
 
+  addList(name: string): void {
+    const id = this.dataService.LISTS.length + 1
+    this.dataService.LISTS.push({id, name});
+    this.location.back();
+  }
 }

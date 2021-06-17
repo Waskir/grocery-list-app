@@ -1,4 +1,4 @@
-<h3>List Title goes here</h3>
+<h3>{{list?.name}}</h3>
 <ul>
   <li *ngFor="let item of items">
     <a [routerLink]="['/item', item.id]">
@@ -7,4 +7,4 @@
   </li>
 </ul>
 <span *ngIf="!items.length">List is empty!</span>
-<button [routerLink]="['/additem']">New Item</button>
+<button [routerLink]="['new']">New Item</button>
