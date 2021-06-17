@@ -1,0 +1,9 @@
+<h3>Grocery List</h3>
+<ul>
+  <li *ngFor="let list of lists">
+    <a [routerLink]="['/list', list.id]">
+      {{list.name}}
+    </a>
+  </li>
+</ul>
+<button [routerLink]="['/addlist']">New List</button>
