@@ -7,6 +7,8 @@ import { MyListsComponent } from './pages/my-lists/my-lists.component';
 import { ListComponent } from './pages/list/list.component';
 import { AddListComponent } from './pages/add-list/add-list.component';
 import { AddItemComponent } from './pages/add-item/add-item.component';
+import { EditListComponent } from './pages/edit-list/edit-list.component';
+import { EditItemComponent } from './pages/edit-item/edit-item.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { AddItemComponent } from './pages/add-item/add-item.component';
     MyListsComponent,
     ListComponent,
     AddListComponent,
-    AddItemComponent
+    AddItemComponent,
+    EditListComponent,
+    EditItemComponent
   ],
   imports: [
     BrowserModule,

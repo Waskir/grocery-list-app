@@ -4,6 +4,8 @@
     <a [routerLink]="['/list', list.id]">
       {{list.name}}
     </a>
+    <button type="button" [routerLink]="['/editlist', list.id]">E</button>
+    <button type="button" (click)="deleteList(list.id)">X</button>
   </li>
 </ul>
 <button [routerLink]="['/newlist']">New List</button>

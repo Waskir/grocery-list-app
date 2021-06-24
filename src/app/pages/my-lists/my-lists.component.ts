@@ -14,4 +14,9 @@ export class MyListsComponent implements OnInit {
   ngOnInit(): void {
     this.lists = this.dataService.LISTS;
   }
+
+  deleteList(id: number): void {
+    const index = this.dataService.LISTS.findIndex(list => list.id === id);
+    this.dataService.LISTS.splice(index, 1);
+  }
 }
