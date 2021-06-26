@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { DataService } from 'src/app/services/data.service';
 import { ActivatedRoute } from '@angular/router';
+import { Item } from 'src/app/models/item.model';
 
 
 @Component({
@@ -20,9 +21,21 @@ export class AddItemComponent implements OnInit {
     this.listId = +this.route.snapshot.paramMap.get('id')!;
   }
 
-  addItem(name: string): void {
-    const id = this.dataService.ITEMS.length + 1
-    this.dataService.ITEMS.push({id, listId: this.listId, name});
-    this.location.back();
+  addItem(name: string, qty: number): void {
+    let newItem: Item = {
+      id: 0,
+      listId: this.listId!,
+      name,
+      qty,
+      done: false,
+      isDeleted: false
+    }
+    this.dataService.addItem(newItem).then(result => {
+      if (result) {
+        this.location.back();
+      } else {
+        console.error('Failed to add new item!');
+      }
+    });
   }
 }

@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Item } from 'src/app/models/item.model';
+import { List } from 'src/app/models/list.model';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -8,11 +10,10 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
-  @Input() listName?: string;
 
   listId?: number;
-  list: any;
-  items: any[] = [];
+  listName?: string;
+  items: Item[] = [];
 
   constructor(
     private dataService: DataService,
@@ -20,16 +21,28 @@ export class ListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('items', this.dataService.ITEMS);
     this.listId = +this.route.snapshot.paramMap.get('id')!;
-    if (this.listId) {
-      this.list = this.dataService.LISTS.find(
-        (list) => list.id === this.listId
-      );
+    this.loadData();
+  }
 
-      this.items = this.dataService.ITEMS.filter(
-        (item) => item.listId === this.listId
-      );
-    }
+  loadData(): void {
+    this.dataService.getListById(this.listId!).then(result => this.listName = result?.name);
+    this.dataService.getListItems(this.listId!).then(result => {
+      if (result) {
+        this.items = result
+      } else {
+        console.error('Failed to load list items!');
+      }
+    });
+  }
+
+  deleteList(id: number): void {
+    this.dataService.removeItem(id).then(result => {
+      if (result) {
+        this.loadData();
+      } else {
+        console.error(`Failed to remove item: ${id}`);
+      }
+    });
   }
 }

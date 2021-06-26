@@ -1,10 +1,12 @@
-<h3>{{list?.name}}</h3>
+<h3>{{listName}}</h3>
 <ul>
   <li *ngFor="let item of items">
     <a [routerLink]="['/item', item.id]">
-      {{item.name}}
+      {{item.name}}&nbsp;({{item.qty}})
     </a>
+    <button type="button" [routerLink]="['/edititem', item.id]">E</button>
+    <button type="button" (click)="deleteList(item.id)">X</button>
   </li>
 </ul>
-<span *ngIf="!items.length">List is empty!</span>
-<button [routerLink]="['new']">New Item</button>
+<span *ngIf="!items.length">List is empty!<br></span>
+<button [routerLink]="['newitem']">New Item</button>

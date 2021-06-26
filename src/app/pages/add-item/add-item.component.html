@@ -1,4 +1,8 @@
 <h3>New Item</h3>
+<label>Name</label>
 <input #name>
 <br>
-<button (click)="addItem(name.value)">Add</button>
+<label>Count</label>
+<input #qty>
+<br><br>
+<button (click)="addItem(name.value, +qty.value)">Add</button>

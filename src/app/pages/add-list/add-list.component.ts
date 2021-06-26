@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { List } from 'src/app/models/list.model';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -12,12 +13,20 @@ export class AddListComponent implements OnInit {
   constructor(private dataService: DataService,
               private location: Location) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   addList(name: string): void {
-    const id = this.dataService.LISTS.length + 1
-    this.dataService.LISTS.push({id, name});
-    this.location.back();
+    let newList: List = {
+      id: 0,
+      name,
+      isDeleted: false
+    }
+    this.dataService.addList(newList).then(result => {
+      if (result) {
+        this.location.back();
+      } else {
+        console.error('Failed to add new list!');
+      }
+    });
   }
 }

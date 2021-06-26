@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { List } from 'src/app/models/list.model';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -7,16 +8,25 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./my-lists.component.scss'],
 })
 export class MyListsComponent implements OnInit {
-  lists: any[] = [];
+  lists: List[] = [];
 
   constructor(private dataService: DataService) {}
 
-  ngOnInit(): void {
-    this.lists = this.dataService.LISTS;
+  ngOnInit() {
+    this.loadData();
+  }
+
+  loadData(): void {
+    this.dataService.getAllLists().then(result => this.lists = result);
   }
 
   deleteList(id: number): void {
-    const index = this.dataService.LISTS.findIndex(list => list.id === id);
-    this.dataService.LISTS.splice(index, 1);
+    this.dataService.removeList(id).then(result => {
+      if (result) {
+        this.loadData();
+      } else {
+        console.error(`Failed to remove list: ${id}`);
+      }
+    });
   }
 }

@@ -1,4 +1,4 @@
 <h3>Edit List</h3>
-<input [value]="name">
+<input #name [value]="list?.name">
 <br>
-<button (click)="saveChanges(name)">Save</button>
+<button (click)="saveChanges(name.value)">Save</button>

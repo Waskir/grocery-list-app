@@ -1,1 +1,8 @@
-<p>edit-item works!</p>
+<h3>Edit Item</h3>
+<label>Name</label>
+<input #name [value]="item?.name">
+<br>
+<label>Count</label>
+<input #qty [value]="item?.qty">
+<br><br>
+<button (click)="saveChanges(name.value, +qty.value)">Save</button>
