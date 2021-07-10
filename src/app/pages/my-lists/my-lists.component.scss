@@ -1,0 +1,41 @@
+.lists-container {
+  display: flex;
+  flex-direction: column;
+  width: 1000px;
+  min-height: 480px;
+}
+
+.list {
+  flex: 1 1 auto;
+
+  .list-element {
+    height: 185px;
+    cursor: pointer;
+    box-shadow: 0 0 4px 0 #ccc;
+
+    &:hover {
+      box-shadow: 0 0 4px 1px #ccc;
+    }
+
+    span {
+      padding: 0 4px;
+    }
+
+    li {
+      &.done {
+        text-decoration: line-through;
+      }
+
+      &.additional {
+        font-style: italic;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+.button.is-rounded {
+  align-self: flex-end;
+  height: 50px;
+  width: 50px;
+}

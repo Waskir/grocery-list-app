@@ -1,4 +1,7 @@
-<h3>Edit List</h3>
-<input #name [value]="list?.name">
-<br>
-<button (click)="saveChanges(name.value)">Save</button>
+<div class="small-window">
+  <h3 class="subtitle">Edit List</h3>
+  <div class="block">
+    <input class="input" placeholder="Name" #name [value]="list?.name">
+  </div>
+  <button class="button is-primary" (click)="saveChanges(name.value)">Save</button>
+</div>

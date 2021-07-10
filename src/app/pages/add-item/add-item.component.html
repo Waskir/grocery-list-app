@@ -1,8 +1,10 @@
-<h3>New Item</h3>
-<label>Name</label>
-<input #name>
-<br>
-<label>Count</label>
-<input #qty>
-<br><br>
-<button (click)="addItem(name.value, +qty.value)">Add</button>
+<div class="small-window">
+  <h3 class="subtitle">New Item</h3>
+  <div class="block">
+    <input class="input" placeholder="Name" #name>
+  </div>
+  <div class="block">
+    <input class="input" placeholder="Count" #qty>
+  </div>
+  <button class="button is-primary" (click)="addItem(name.value, +qty.value)">Add</button>
+</div>

@@ -1,8 +1,10 @@
-<h3>Edit Item</h3>
-<label>Name</label>
-<input #name [value]="item?.name">
-<br>
-<label>Count</label>
-<input #qty [value]="item?.qty">
-<br><br>
-<button (click)="saveChanges(name.value, +qty.value)">Save</button>
+<div class="small-window">
+  <h3 class="subtitle">Edit Item</h3>
+  <div class="block">
+    <input class="input" placeholder="Name" #name [value]="item?.name">
+  </div>
+  <div class="block">
+    <input class="input" placeholder="Count" #qty [value]="item?.qty">
+  </div>
+  <button class="button is-primary" (click)="saveChanges(name.value, +qty.value)">Save</button>
+</div>

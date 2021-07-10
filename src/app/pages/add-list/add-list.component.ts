@@ -19,7 +19,8 @@ export class AddListComponent implements OnInit {
     let newList: List = {
       id: 0,
       name,
-      isDeleted: false
+      isDeleted: false,
+      items: [],
     }
     this.dataService.addList(newList).then(result => {
       if (result) {

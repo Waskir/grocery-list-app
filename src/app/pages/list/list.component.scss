@@ -1,0 +1,51 @@
+.lists-container {
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+  height: 100%;
+  max-height: 600px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1 1 auto;
+  padding-bottom: 20px;
+
+  .list-element {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 0 0 4px 0 #ccc;
+
+    &:hover {
+      box-shadow: 0 0 4px 1px #ccc;
+    }
+
+    span {
+      flex: 1 1 auto;
+      padding: 0 4px;
+    }
+
+    button {
+      background: none;
+      border: none;
+      font-size: 1em;
+      color: #444;
+      padding: 0.5rem 0.75rem;
+
+      &.checkbox {
+        font-size: 1.15em;
+      }
+    }
+  }
+}
+
+.button.is-rounded {
+  align-self: flex-end;
+  height: 50px;
+  width: 50px;
+}

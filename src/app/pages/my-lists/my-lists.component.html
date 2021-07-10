@@ -1,11 +1,35 @@
-<h3>Grocery List</h3>
-<ul>
-  <li *ngFor="let list of lists">
-    <a [routerLink]="['/list', list.id]">
-      {{list.name}}
-    </a>
-    <button type="button" [routerLink]="['/editlist', list.id]">E</button>
-    <button type="button" (click)="deleteList(list.id)">X</button>
-  </li>
-</ul>
-<button [routerLink]="['/newlist']">New List</button>
+<div class="lists-container">
+  <div class="list columns is-multiline">
+    <div class="column is-one-third" [routerLink]="['/list', list.id]" *ngFor="let list of lists">
+      <div class="list-element card">
+        <header class="card-header">
+          <p class="card-header-title">
+            {{list.name}}
+          </p>
+          <button class="card-header-icon" type="button" (click)="editList(list.id, $event)">
+            <fa-icon [icon]="faEdit"></fa-icon>
+          </button>
+          <button class="card-header-icon" type="button" (click)="deleteList(list.id, $event)">
+            <fa-icon [icon]="faDelete"></fa-icon>
+          </button>
+        </header>
+        <div class="card-content">
+          <ul>
+            <li *ngFor="let item of list.items.slice(0,3)" [ngClass]="item.done ? 'done' : ''">
+              {{item.name}}&nbsp;({{item.qty}})
+            </li>
+            <li class="additional" *ngIf="list.items.length > 3">
+              +{{list.items.length - 3}}&nbsp;items more...
+            </li>
+            <li class="additional" *ngIf="!list.items.length">
+              List is empty...
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="button is-rounded is-primary" [routerLink]="['/newlist']">
+    <fa-icon [icon]="faPlus"></fa-icon>
+  </button>
+</div>

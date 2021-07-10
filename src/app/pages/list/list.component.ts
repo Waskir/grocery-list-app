@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { faCheckSquare, faSquare } from '@fortawesome/free-regular-svg-icons';
+import { faPen, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Item } from 'src/app/models/item.model';
 import { List } from 'src/app/models/list.model';
 import { DataService } from 'src/app/services/data.service';
@@ -11,13 +13,20 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class ListComponent implements OnInit {
 
+  faPlus = faPlus;
+  faDelete = faTrashAlt;
+  faEdit = faPen;
+  faDone = faCheckSquare;
+  faTodo = faSquare
+
   listId?: number;
   listName?: string;
   items: Item[] = [];
 
   constructor(
     private dataService: DataService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -36,7 +45,21 @@ export class ListComponent implements OnInit {
     });
   }
 
-  deleteList(id: number): void {
+  toggleStatus(item: Item): void {
+    item.done = !item.done;
+    this.dataService.updateItem(item).then(result => {
+      if (!result) {
+        console.error(`Failed to update item: ${item.id}`);
+      }
+    });
+  }
+
+  editItem(id: number, e: Event): void {
+    this.router.navigate(['/edititem', id]);
+    e.stopPropagation();
+  }
+
+  deleteItem(id: number, e: Event): void {
     this.dataService.removeItem(id).then(result => {
       if (result) {
         this.loadData();
@@ -44,5 +67,6 @@ export class ListComponent implements OnInit {
         console.error(`Failed to remove item: ${id}`);
       }
     });
+    e.stopPropagation();
   }
 }

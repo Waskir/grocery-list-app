@@ -1,12 +1,22 @@
-<h3>{{listName}}</h3>
-<ul>
-  <li *ngFor="let item of items">
-    <a [routerLink]="['/item', item.id]">
-      {{item.name}}&nbsp;({{item.qty}})
-    </a>
-    <button type="button" [routerLink]="['/edititem', item.id]">E</button>
-    <button type="button" (click)="deleteList(item.id)">X</button>
-  </li>
-</ul>
-<span *ngIf="!items.length">List is empty!<br></span>
-<button [routerLink]="['newitem']">New Item</button>
+<div class="lists-container">
+  <div class="list">
+    <span *ngIf="!items.length">List is empty!<br></span>
+    <div class="list-element" *ngFor="let item of items" (click)="toggleStatus(item)">
+      <button class="checkbox" type="button">
+        <fa-icon [icon]="item.done ? faDone : faTodo"></fa-icon>
+      </button>
+      <span>
+        {{item.name}}&nbsp;({{item.qty}})
+      </span>
+      <button type="button" (click)="editItem(item.id, $event)">
+        <fa-icon [icon]="faEdit"></fa-icon>
+      </button>
+      <button type="button" (click)="deleteItem(item.id, $event)">
+        <fa-icon [icon]="faDelete"></fa-icon>
+      </button>
+    </div>
+  </div>
+  <button class="button is-rounded is-primary" [routerLink]="['newitem']">
+    <fa-icon [icon]="faPlus"></fa-icon>
+  </button>
+</div>

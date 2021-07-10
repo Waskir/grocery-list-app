@@ -1,4 +1,7 @@
-<h3>New List</h3>
-<input #name>
-<br>
-<button (click)="addList(name.value)">Add</button>
+<div class="small-window">
+  <h3 class="subtitle">New List</h3>
+  <div class="block">
+    <input class="input" placeholder="Name" #name>
+  </div>
+  <button class="button is-primary" (click)="addList(name.value)">Add</button>
+</div>
